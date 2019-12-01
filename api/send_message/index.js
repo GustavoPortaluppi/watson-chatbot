@@ -22,15 +22,12 @@ exports.handler = async (event) => {
     });
 
     const { status, result: { output } } = req;
-    const { generic: [{ text }] } = output;
 
-    if (status === 200 && text) {
+    if (status === 200 && output) {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({
-          text
-        }),
+        body: JSON.stringify(output),
       };
     } else {
       return {

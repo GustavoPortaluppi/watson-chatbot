@@ -1,0 +1,84 @@
+<header class="page-header">
+  <div class="container ">
+    <h4>IBM Watson Assistant v2</h4>
+    <h6>Gustavo Portaluppi - m78185</h6>
+
+    <hr style="border-color: white;" align="left" width="80px">
+
+    <h6 style="font-size: 12px; margin-bottom: 10px;">
+      Message examples: "matricula", "mat", "teste 1", "t2", "fim"...
+    </h6>
+  </div>
+</header>
+<div class="main" #scrollContainer>
+  <div class="container">
+
+    <div class="chat-log">
+
+      <div #messagesContainer *ngFor="let message of messages">
+
+        <div class="chat-log__item" *ngIf="message?.from === 'server'">
+          <h3 class="chat-log__author">
+            ChatBot
+            <small>{{ getDate() | date: 'HH:mm' }}</small>
+          </h3>
+          <div class="chat-log__message" *ngFor="let m of message?.generic">
+
+            <div style="margin-top: 5px;" *ngIf="m?.response_type === 'text'">
+              <span style="font-size: 14px;">{{ m?.text }}</span>
+            </div>
+
+            <div *ngIf="m?.response_type === 'option'">
+              <span style="font-size: 14px;">{{ m?.description }}</span>
+              <ul style="margin-top: 5px;">
+                <li *ngFor="let option of m?.options">
+                  <span style="font-size: 12px;">{{ option?.label }}</span>
+                  <span style="font-size: 12px; margin-left: 5px;"
+                        *ngIf="option?.value?.input?.text">({{ option?.value?.input?.text }})</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="chat-log__item chat-log__item--own" *ngIf="message?.from === 'client'">
+          <h3 class="chat-log__author">
+            Me
+            <small>{{ getDate() | date: 'HH:mm' }}</small>
+          </h3>
+          <div class="chat-log__message">
+            <span style="font-size: 14px;">{{ message?.message }}</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="chat-form">
+    <div class="container ">
+      <form class="form-horizontal">
+        <div class="row">
+          <div class="col-sm-10 col-xs-8">
+            <input #message [(ngModel)]="clientMessage"
+                   (keyup.enter)="send()"
+                   [disabled]="loading"
+                   type="text" class="form-control" name="clientMessage" placeholder="Type a message"/>
+          </div>
+          <div class="col-sm-2 col-xs-4">
+            <button type="button" class="btn btn-success btn-block"
+                    [disabled]="loading"
+                    (click)="send()">
+              {{ (loading) ? 'Sending...' : 'Send' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+

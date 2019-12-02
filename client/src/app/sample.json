@@ -1,0 +1,57 @@
+[
+  {
+    "from": "server",
+    "generic": [
+      {
+        "title": "Cadeira",
+        "options": [
+          {
+            "label": "Inteligência Artificial",
+            "value": {
+              "input": {
+                "text": "IA"
+              }
+            }
+          },
+          {
+            "label": "Redes de Computadores",
+            "value": {
+              "input": {
+                "text": "RC"
+              }
+            }
+          }
+        ],
+        "description": "Selecione qual cadeira deseja cursar no próximo semestre",
+        "response_typ": "option"
+      }
+    ],
+    "intents": [
+      {
+        "intent": "ibm-action - matrcula",
+        "confidence": 1
+      }
+    ],
+    "entities": []
+  },
+  {
+    "from": "server",
+    "generic": [
+      {
+        "response_type": "text",
+        "text": "Teste 1 executado com sucesso."
+      }
+    ],
+    "intents": [
+      {
+        "intent": "ibm-action-teste_1",
+        "confidence": 1
+      }
+    ],
+    "entities": []
+  },
+  {
+    "from": "client",
+    "message": "teste"
+  }
+];

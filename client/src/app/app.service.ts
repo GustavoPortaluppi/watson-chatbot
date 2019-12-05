@@ -10,10 +10,10 @@ export class AppService {
   }
 
   createSession() {
-    return this.http.post(`${environment.BASE_URL_API}/session`, null);
+    return this.http.post(`${environment.BASE_URL_API}/sessions`, null);
   }
 
   sendMessage(sessionId: string, message: string) {
-    return this.http.post(`${environment.BASE_URL_API}/message`, { sessionId, message });
+    return this.http.post(`${environment.BASE_URL_API}/messages`, { sessionId, message });
   }
 }
